@@ -64,7 +64,7 @@ class Cart
 
     /**
      * This holds the currently added item id in cart for association
-     * 
+     *
      * @var
      */
     protected $currentItemId;
@@ -154,7 +154,7 @@ class Cart
      * @return $this
      * @throws InvalidItemException
      */
-    public function add($id, $name = null, $price = null, $quantity = null, $attributes = array(), $conditions = array(), $associatedModel = null)
+    public function add($id, $name = null, $price = null, $quantity = null, $service_type = null, $attributes = array(), $conditions = array(), $associatedModel = null)
     {
         // if the first argument is an array,
         // we will need to call add again
@@ -168,6 +168,7 @@ class Cart
                         $item['name'],
                         $item['price'],
                         $item['quantity'],
+                        $item['service_type'],
                         Helpers::issetAndHasValueOrAssignDefault($item['attributes'], array()),
                         Helpers::issetAndHasValueOrAssignDefault($item['conditions'], array()),
                         Helpers::issetAndHasValueOrAssignDefault($item['associatedModel'], null)
@@ -179,6 +180,7 @@ class Cart
                     $id['name'],
                     $id['price'],
                     $id['quantity'],
+                    $id['service_type'],
                     Helpers::issetAndHasValueOrAssignDefault($id['attributes'], array()),
                     Helpers::issetAndHasValueOrAssignDefault($id['conditions'], array()),
                     Helpers::issetAndHasValueOrAssignDefault($id['associatedModel'], null)
@@ -193,6 +195,7 @@ class Cart
             'name' => $name,
             'price' => Helpers::normalizePrice($price),
             'quantity' => $quantity,
+            'service_type' => $service_type,
             'attributes' => new ItemAttributeCollection($attributes),
             'conditions' => $conditions
         );
